@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
@@ -14,33 +15,49 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void createUsersTable() throws SQLException {
-        String create = "CREATE TABLE `user` (\n" +
+    public void createUsersTable() {
+        String create = "CREATE TABLE IF NOT EXISTS `user` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `name` VARCHAR(45) NOT NULL,\n" +
                 "  `lastName` VARCHAR(45) NOT NULL,\n" +
                 "  `age` INT NOT NULL,\n" +
                 "  PRIMARY KEY (`id`));";
-        Statement statement = Util.getMySQLConnection().createStatement();
-        statement.execute(create);
+        Statement statement;
+        try {
+            statement = Util.getMySQLConnection().createStatement();
+            statement.execute(create);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-    public void dropUsersTable() throws SQLException {
-        String drop = "DROP TABLE `user`;";
-        Statement statement = Util.getMySQLConnection().createStatement();
-        statement.execute(drop);
+    public void dropUsersTable() {
+        String drop = "DROP TABLE IF EXISTS `user`;";
+        Statement statement;
+        try {
+            statement = Util.getMySQLConnection().createStatement();
+            statement.execute(drop);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
         String insertNew = "insert into user(name, lastName, age) values(?,?,?)";
-        PreparedStatement preparedStatement = Util.getMySQLConnection().prepareStatement(insertNew);
-        preparedStatement.setString(1,name);
-        preparedStatement.setString(2,lastName);
-        preparedStatement.setByte(3,age);
-        preparedStatement.execute();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = Util.getMySQLConnection().prepareStatement(insertNew);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setByte(3, age);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("Пользователь " + name + " добавлен в таблицу!");
 
     }
@@ -49,7 +66,7 @@ public class UserDaoJDBCImpl implements UserDao {
         String remove = "delete from user where id=?";
         try {
             PreparedStatement statement = Util.getMySQLConnection().prepareStatement(remove);
-            statement.setLong(1,id);
+            statement.setLong(1, id);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,29 +74,37 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() {
         String query = "select * from user";
+        List<User> users = new ArrayList<>();
         try {
             Statement statement = Util.getMySQLConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            while ( resultSet.next()) {
+            while (resultSet.next()) {
                 User user = new User();
                 user.setId((long) resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
                 user.setLastName(resultSet.getString("lastName"));
                 user.setAge((byte) resultSet.getInt("age"));
-                System.out.println(user);
+                users.add(user);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       return null;
+        return users;
     }
 
-    public void cleanUsersTable() throws SQLException {
+    public void cleanUsersTable() {
         String clean = "delete from user";
-        Statement statement = Util.getMySQLConnection().createStatement();
-        statement.execute(clean);
+        Statement statement;
+        try {
+            statement = Util.getMySQLConnection().createStatement();
+            statement.execute(clean);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

@@ -14,16 +14,16 @@ public class Main {
         Util.getMySQLConnection();
         UserDao newUser = new UserDaoJDBCImpl();
 
-//        newUser.createUsersTable();
+        newUser.createUsersTable();
 
-//        newUser.saveUser("Oleg","Mihaylov", (byte) 45);
-//        newUser.saveUser("Ilya","Iloyev",(byte) 23);
-//        newUser.saveUser("Kirill","Iloyev",(byte) 25);
-//        newUser.saveUser("Misha","Olegov",(byte) 29);
-//        newUser.removeUserById(9);
-//        newUser.cleanUsersTable();
-//        newUser.getAllUsers();
+        newUser.saveUser("Oleg", "Mihaylov", (byte) 45);
+        newUser.saveUser("Ilya", "Iloyev", (byte) 23);
+        newUser.saveUser("Kirill", "Iloyev", (byte) 25);
+        newUser.saveUser("Misha", "Olegov", (byte) 29);
+        newUser.removeUserById(9);
+        newUser.cleanUsersTable();
+        newUser.getAllUsers();
 
-//      newUser.dropUsersTable();
+        newUser.dropUsersTable();
     }
 }
