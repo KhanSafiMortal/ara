@@ -10,12 +10,11 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        // реализуйте алгоритм здесь
+
         Util.getMySQLConnection();
         UserDao newUser = new UserDaoJDBCImpl();
 
         newUser.createUsersTable();
-
         newUser.saveUser("Oleg", "Mihaylov", (byte) 45);
         newUser.saveUser("Ilya", "Iloyev", (byte) 23);
         newUser.saveUser("Kirill", "Iloyev", (byte) 25);
@@ -23,7 +22,6 @@ public class Main {
         newUser.removeUserById(9);
         newUser.cleanUsersTable();
         newUser.getAllUsers();
-
         newUser.dropUsersTable();
     }
 }

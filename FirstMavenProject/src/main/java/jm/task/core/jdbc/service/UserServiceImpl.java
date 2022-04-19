@@ -8,7 +8,6 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     UserDaoJDBCImpl userDaoJDBC;
-
     {
         try {
             userDaoJDBC = new UserDaoJDBCImpl();
@@ -18,13 +17,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserServiceImpl() {
-
     }
 
 
     public void createUsersTable() {
         userDaoJDBC.createUsersTable();
-
     }
 
     public void dropUsersTable() {
@@ -34,7 +31,6 @@ public class UserServiceImpl implements UserService {
     public void saveUser(String name, String lastName, byte age) {
         userDaoJDBC.saveUser(name, lastName, age);
         System.out.println("Пользователь " + name + " добавлен в таблицу!");
-
     }
 
     public void removeUserById(long id) {
@@ -52,6 +48,5 @@ public class UserServiceImpl implements UserService {
 
     public void cleanUsersTable() {
         userDaoJDBC.cleanUsersTable();
-
     }
 }

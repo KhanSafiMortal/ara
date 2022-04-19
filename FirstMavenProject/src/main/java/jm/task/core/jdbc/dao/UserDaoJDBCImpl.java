@@ -12,7 +12,6 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
-
     }
 
     public void createUsersTable() {
@@ -29,8 +28,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void dropUsersTable() {
@@ -42,8 +39,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void saveUser(String name, String lastName, byte age) {
@@ -71,7 +66,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public List<User> getAllUsers() {
@@ -104,7 +98,5 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 }
