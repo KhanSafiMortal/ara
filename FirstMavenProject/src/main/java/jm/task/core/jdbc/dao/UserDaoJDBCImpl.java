@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+// не совсем понимаю навсчет интерфейсов, что конкретно нужно сделать?
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() throws SQLException {
@@ -43,9 +44,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         String insertNew = "insert into user(name, lastName, age) values(?,?,?)";
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = Util.getMySQLConnection().prepareStatement(insertNew);
+            PreparedStatement preparedStatement = Util.getMySQLConnection().prepareStatement(insertNew);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
