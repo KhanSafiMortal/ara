@@ -26,6 +26,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             statement = Util.getMySQLConnection().createStatement();
             statement.execute(create);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -37,6 +38,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try {
             statement = Util.getMySQLConnection().createStatement();
             statement.execute(drop);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,6 +52,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.execute();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +66,7 @@ public class UserDaoJDBCImpl implements UserDao {
             PreparedStatement statement = Util.getMySQLConnection().prepareStatement(remove);
             statement.setLong(1, id);
             statement.execute();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,7 +85,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setLastName(resultSet.getString("lastName"));
                 user.setAge((byte) resultSet.getInt("age"));
                 users.add(user);
-
+                resultSet.close();
+                statement.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,11 +95,12 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        String clean = "delete from user";
+        String clean = "TRUNCATE TABLE user";
         Statement statement;
         try {
             statement = Util.getMySQLConnection().createStatement();
             statement.execute(clean);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

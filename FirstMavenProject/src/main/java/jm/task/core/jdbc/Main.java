@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
 
-        UserDao newUser =  new UserDaoJDBCImpl();
+        UserDao newUser =  new UserServiceImpl();
 
 
         newUser.createUsersTable();
