@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     private static Connection connection;
-    public UserDaoJDBCImpl() throws SQLException {
+    public UserDaoJDBCImpl() {
     }
     static {
         try {
@@ -137,6 +137,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
         return users;
     }
+//    ничего не менял
 
     public void cleanUsersTable() throws SQLException {
         String clean = "TRUNCATE TABLE user";

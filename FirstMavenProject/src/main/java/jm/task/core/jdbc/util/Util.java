@@ -20,7 +20,6 @@ public class Util {
         String userName = "root";
         String password = "Ser1co2nos";
         return getMySQLConnection(connUrl, userName, password);
-
     }
 
     public static Connection getMySQLConnection(String connUrl,
@@ -32,12 +31,12 @@ public class Util {
 
 
     private static SessionFactory sessionFactory;
+// вроде все по инструкции делал
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
-
 
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
@@ -46,6 +45,8 @@ public class Util {
                 settings.put(Environment.PASS, "Ser1co2nos");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
+                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
 
                 configuration.setProperties(settings);
 
