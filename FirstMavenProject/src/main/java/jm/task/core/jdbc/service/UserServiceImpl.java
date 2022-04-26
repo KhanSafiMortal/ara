@@ -7,7 +7,7 @@ import jm.task.core.jdbc.model.User;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserServiceImpl implements UserService, UserDao {
+public class UserServiceImpl implements UserService {
     UserDao userDaoJDBC;
     {
         try {
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDao {
 
     }
 
-    public void removeUserById(long id) {
+    public void removeUserById(long id) throws SQLException {
         userDaoJDBC.removeUserById(id);
 
     }
