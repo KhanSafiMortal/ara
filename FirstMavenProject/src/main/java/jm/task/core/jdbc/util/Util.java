@@ -1,6 +1,6 @@
 package jm.task.core.jdbc.util;
-
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import java.util.Properties;
